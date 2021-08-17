@@ -8,6 +8,7 @@ public interface SuperIntegerList {
 
     void add(int number);
 
+
     void removeByIndex(int index);
 
     void removeByValue(int value);

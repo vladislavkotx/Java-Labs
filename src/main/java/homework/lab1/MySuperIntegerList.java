@@ -27,7 +27,7 @@ public class MySuperIntegerList implements SuperIntegerList {
             return;
         }
         int [] newArr = new int[myArr.length - 1];
-        if (index >= 0) System.arraycopy(myArr, 0, newArr, 0, index);
+        System.arraycopy(myArr, 0, newArr, 0, index);
         if (this.myArr.length - (index + 1) >= 0) {
             System.arraycopy(myArr, index + 1, newArr, index, myArr.length - index - 1);
         }
