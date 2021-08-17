@@ -20,6 +20,12 @@ public class MySuperIntegerList implements SuperIntegerList {
 
     @Override
     public void removeByIndex(int index) {
+        if (index < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (index >= myArr.length) {
+            return;
+        }
         int [] newArr = new int[myArr.length - 1];
         if (index >= 0) System.arraycopy(myArr, 0, newArr, 0, index);
         if (this.myArr.length - (index + 1) >= 0) {
@@ -39,6 +45,13 @@ public class MySuperIntegerList implements SuperIntegerList {
 
     @Override
     public int get(int index) {
+        if (index < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        if (index >= myArr.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         return this.myArr[index];
     }
 
