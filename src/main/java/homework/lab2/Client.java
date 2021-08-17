@@ -3,10 +3,6 @@ package homework.lab2;
 import lombok.Data;
 import lombok.ToString;
 
-/**
- * @author Evgeny Borisov
- */
-
 @ToString
 public class Client {
     private final int debt;

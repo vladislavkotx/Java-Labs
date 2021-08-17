@@ -1,9 +1,5 @@
 package homework.lab1;
 
-/**
- * @author Evgeny Borisov
- */
-
 public interface SuperIntegerList {
 
     void add(int number);
