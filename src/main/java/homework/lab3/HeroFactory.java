@@ -1,6 +1,8 @@
 package homework.lab3;
 
+import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 public class HeroFactory {
     public static Hero createHero () {

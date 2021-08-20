@@ -7,7 +7,7 @@ import java.util.Random;
 
 @Getter
 @Setter
-abstract public class HeroBase {
+abstract public class HeroBase implements Hero {
     String name;
     String className;
     int hp;
@@ -19,7 +19,7 @@ abstract public class HeroBase {
         return str[new Random().nextInt(str.length)];
     }
 
-    String kick(Hero hero) {
+    public String kick(Hero hero) {
         return "";
     }
 }
