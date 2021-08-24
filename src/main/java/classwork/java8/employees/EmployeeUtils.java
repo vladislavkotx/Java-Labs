@@ -1,11 +1,18 @@
 package classwork.java8.employees;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EmployeeUtils {
+    public static Map<Seniority, Long> groupBySeniority (List <Employee> employees) {
+//        Map<Seniority, Long> collect = employees.stream().collect(Collectors.groupingBy(e -> Seniority.findBySalary(e.getSalary()), Collectors.counting()));
+//        Map<Seniority, Long> collect = employees.stream().collect(Collectors.groupingBy(e -> Seniority.getPositionBySalary(e.getSalary()), Collectors.counting()));
+        Map<Seniority, Long> collect = employees.stream().collect(Collectors.groupingBy(e -> Seniority.findBySalaryWithFilter(e.getSalary()), Collectors.counting()));
+        return collect;
+    }
+
+
+
     public static int employeeSum(List<Employee> list) {
         return list.stream()
                 .mapToInt(Employee::getSalary)

@@ -14,26 +14,31 @@ public class Employee {
     private String name;
     private int salary;
 
+
+
     public static void main(String[] args) {
         Employee max = Employee.builder()
                 .name("Max")
-                .salary(100)
+                .salary(10)
                 .build();
 
         Employee alex = Employee.builder()
                 .name("Alex")
-                .salary(150)
+                .salary(100)
                 .build();
 
         List<Employee> list = List.of(max, alex);
-        int sum = EmployeeUtils.employeeSum(list);
-        System.out.println(sum);
+        Map<Seniority, Long> seniorityLongMap = EmployeeUtils.groupBySeniority(list);
+        System.out.println(seniorityLongMap);
 
-        List<String> strings = EmployeeUtils.getNamesSortedBySalary(list);
-        System.out.println(strings);
-
-        Map<String, Employee> stringEmployeeMap = EmployeeUtils.mapNameToEmployee(list);
-        System.out.println(stringEmployeeMap);
+//        int sum = EmployeeUtils.employeeSum(list);
+//        System.out.println(sum);
+//
+//        List<String> strings = EmployeeUtils.getNamesSortedBySalary(list);
+//        System.out.println(strings);
+//
+//        Map<String, Employee> stringEmployeeMap = EmployeeUtils.mapNameToEmployee(list);
+//        System.out.println(stringEmployeeMap);
     }
 
 }
