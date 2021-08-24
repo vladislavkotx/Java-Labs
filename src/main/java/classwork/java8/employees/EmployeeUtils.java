@@ -12,7 +12,7 @@ public class EmployeeUtils {
                 .sum();
     }
 
-    public static List <String> sortedBySalary (List <Employee> list) {
+    public static List <String> getNamesSortedBySalary (List <Employee> list) {
         return list.stream()
                 .sorted(Comparator.comparing(Employee::getSalary))
                 .map(Employee::getName)

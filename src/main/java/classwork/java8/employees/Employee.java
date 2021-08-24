@@ -29,7 +29,7 @@ public class Employee {
         int sum = EmployeeUtils.employeeSum(list);
         System.out.println(sum);
 
-        List<String> strings = EmployeeUtils.sortedBySalary(list);
+        List<String> strings = EmployeeUtils.getNamesSortedBySalary(list);
         System.out.println(strings);
 
         Map<String, Employee> stringEmployeeMap = EmployeeUtils.mapNameToEmployee(list);
