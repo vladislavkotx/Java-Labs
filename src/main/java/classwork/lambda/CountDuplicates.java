@@ -28,6 +28,9 @@ public class CountDuplicates {
 
     public static void main(String[] args) {
         List<Integer> list = List.of(1, 2, 3, 7, 11, 13, 17);
-        forEachWithDelay(list, 500, System.out::println);
+//        forEachWithDelay(list, 500, x -> System.out.println(x));
+        list.stream()
+                .map(Integer::reverse)
+                .forEach(System.out::println);
     }
 }
