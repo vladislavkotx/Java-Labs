@@ -1,4 +1,4 @@
-package classwork.java8.employees_salaries;
+package classwork.java8.employees;
 
 import lombok.Builder;
 import lombok.Data;
