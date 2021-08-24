@@ -11,9 +11,8 @@ import java.util.stream.Stream;
 
 public class BlackFridayService {
     public void printBlackFridayPerYearSorted(int startYear, int endYear) {
-        LocalDate startDate = LocalDate.of(startYear, 1, 1);
-
-        Stream.iterate(startDate, date -> date.getYear() != endYear, date -> date.plusDays(1))
+        Stream.iterate(LocalDate.of(startYear, 1, 1),
+                        date -> date.getYear() != endYear, date -> date.plusDays(1))
                 .filter(date -> date.getDayOfWeek() == DayOfWeek.FRIDAY)
                 .filter(date -> date.getDayOfMonth() == 13)
                 .collect(Collectors.groupingBy(LocalDate::getYear, Collectors.counting()))
@@ -22,7 +21,6 @@ public class BlackFridayService {
                 .sorted(Comparator.comparingInt(Map.Entry::getKey))
                 .sorted((y1, y2) -> (int) (y2.getValue() - y1.getValue()))
                 .forEach(System.out::println);
-//        System.out.println(collect);
     }
 
     public static void main(String[] args) {
