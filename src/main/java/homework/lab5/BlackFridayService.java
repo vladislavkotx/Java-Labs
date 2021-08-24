@@ -14,15 +14,14 @@ public class BlackFridayService {
         LocalDate startDate = LocalDate.of(startYear, 1, 1);
 
         Stream.iterate(startDate, date -> date.getYear() != endYear, date -> date.plusDays(1))
-                .parallel()
                 .filter(date -> date.getDayOfWeek() == DayOfWeek.FRIDAY)
                 .filter(date -> date.getDayOfMonth() == 13)
                 .collect(Collectors.groupingBy(LocalDate::getYear, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .sorted(Map.Entry.<Integer, Long>comparingByKey())
-                .sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
-                .forEachOrdered(System.out::println);
+                .sorted(Comparator.comparingInt(Map.Entry::getKey))
+                .sorted((y1, y2) -> (int) (y2.getValue() - y1.getValue()))
+                .forEach(System.out::println);
 //        System.out.println(collect);
     }
 
