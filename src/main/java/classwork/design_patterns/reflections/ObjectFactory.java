@@ -3,11 +3,12 @@ package classwork.design_patterns.reflections;
 import classwork.design_patterns.reflections.annotations.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 
+import javax.annotation.PostConstruct;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.*;
 
 public class ObjectFactory {
@@ -17,6 +18,7 @@ public class ObjectFactory {
     private Reflections scanner = new Reflections("classwork.design_patterns.reflections");
 
     private List<ObjectConfigurator> configurators = new ArrayList<>();
+    private List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
 
     @SneakyThrows
     public ObjectFactory() {
@@ -26,6 +28,10 @@ public class ObjectFactory {
                 configurators.add(aClass.getDeclaredConstructor().newInstance());
             }
         }
+        Set<Class<? extends ProxyConfigurator>> set = scanner.getSubTypesOf(ProxyConfigurator.class);
+        for (Class<? extends ProxyConfigurator> aClass : set) {
+            proxyConfigurators.add(aClass.getDeclaredConstructor().newInstance());
+        }
     }
 
     @SneakyThrows
@@ -33,7 +39,15 @@ public class ObjectFactory {
         type = resolveImple(type);
         T t = type.getDeclaredConstructor().newInstance();
         configure(t);
-        init(t);
+        invokeInit(type, t);
+        t = wrapWithProxyIfNeeded(type, t);
+        return t;
+    }
+
+    private <T> T wrapWithProxyIfNeeded(Class<T> type, T t) {
+        for (ProxyConfigurator proxyConfigurator : proxyConfigurators) {
+            t = (T) proxyConfigurator.configure(t, type);
+        }
         return t;
     }
 
@@ -41,12 +55,11 @@ public class ObjectFactory {
         configurators.forEach(configurator -> configurator.configure(t));
     }
 
-    @SneakyThrows
-    private <T> void init(T t) {
-        for (Method declaredMethod : t.getClass().getDeclaredMethods()) {
-            if (declaredMethod.getName().startsWith("init")) {
-                declaredMethod.invoke(t);
-            }
+    private <T> void invokeInit(Class<T> type, T t) throws IllegalAccessException, InvocationTargetException {
+        Set<Method> allMethods = ReflectionUtils
+                .getAllMethods(type, method -> method.isAnnotationPresent(PostConstruct.class));
+        for (Method method : allMethods) {
+            method.invoke(t);
         }
     }
 

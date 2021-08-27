@@ -1,6 +1,10 @@
 package classwork.design_patterns.reflections.models;
 
+import classwork.design_patterns.reflections.annotations.Benchmark;
 import classwork.design_patterns.reflections.annotations.InjectByType;
+
+import javax.annotation.PostConstruct;
+
 
 public class IRobot {
     @InjectByType
@@ -8,6 +12,7 @@ public class IRobot {
     @InjectByType
     private Cleaner cleaner;
 
+    @PostConstruct
     public void init () {
         System.out.println("init done");
     }
