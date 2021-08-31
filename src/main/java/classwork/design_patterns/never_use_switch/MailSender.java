@@ -4,11 +4,13 @@ import classwork.design_patterns.never_use_switch.mail_sender_service.HappyBDayM
 import classwork.design_patterns.never_use_switch.mail_sender_service.MailSenderService;
 import classwork.design_patterns.never_use_switch.mail_sender_service.WelcomeMailSenderSevice;
 import classwork.enums.HttpCode;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MailSender {
+
     private final static Map<Integer, MailSenderService> mailMap = new HashMap<>();
 
     static {

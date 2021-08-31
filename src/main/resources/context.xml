@@ -9,9 +9,6 @@
     <bean class="classwork.real_spring.BeanDefinitionValidatorBeanFactoryPostProcessor"/>
 
 
-
-
-
     <bean id="s" class="java.lang.String">
         <constructor-arg value="Trust me"/>
     </bean>
